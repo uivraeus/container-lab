@@ -1,0 +1,53 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/go
+{
+	"name": "Container Lab (with Go)",
+	"image": "mcr.microsoft.com/devcontainers/go:0-1-bullseye",
+	"features": {
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+			"moby": true,
+			"azureDnsAutoDetection": true,
+			"installDockerBuildx": true,
+			"version": "latest",
+			"dockerDashComposeVersion": "v2"
+		},
+		"ghcr.io/eitsupi/devcontainer-features/jq-likes:1": {
+			"jqVersion": "os-provided",
+			"yqVersion": "4",
+			"gojqVersion": "latest"
+		},
+		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
+			"version": "latest",
+			"helm": "latest",
+			"minikube": "none"
+		},
+		"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+			"packages": "podman,slirp4netns,uidmap" //podman dependencies not included in base image, nor in podman's install (?) 
+		},
+		"ghcr.io/rio/features/k3d:1": {}
+	},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	"postCreateCommand": "k3d cluster create mycluster || echo 'Proceeding anyway'",
+
+	// Podman requires the shared mount propagatio:
+	// - https://github.com/containers/buildah/issues/3726#issuecomment-1018544246
+	// - https://github.com/containers/buildah/issues/3726#issuecomment-1171146242)
+	"postStartCommand": "sudo mount --make-rshared /",
+
+	// Configure tool-specific properties.
+	"customizations": {
+		// Configure properties specific to VS Code.
+		"vscode": {
+			// Add the IDs of extensions you want installed when the container is created.
+			"extensions": [
+				"golang.Go"
+			]
+		}
+	}
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
