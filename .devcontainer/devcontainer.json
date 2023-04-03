@@ -32,7 +32,7 @@
 
 	"postCreateCommand": "k3d cluster create mycluster || echo 'Proceeding anyway'",
 
-	// Podman requires the shared mount propagatio:
+	// Podman requires the shared mount propagation:
 	// - https://github.com/containers/buildah/issues/3726#issuecomment-1018544246
 	// - https://github.com/containers/buildah/issues/3726#issuecomment-1171146242)
 	"postStartCommand": "sudo mount --make-rshared /",
