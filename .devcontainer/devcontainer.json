@@ -23,7 +23,7 @@
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
-	"postCreateCommand": "k3d cluster start mycluster 2>/dev/null || k3d cluster create mycluster || echo 'Proceeding anyway'",
+	"postCreateCommand": "curl -ssL https://raw.githubusercontent.com/uivraeus/container-lab/main/post-create.sh | bash", // k3d cluster etc.
 
 	// Podman requires the shared mount propagation:
 	// - https://github.com/containers/buildah/issues/3726#issuecomment-1018544246
