@@ -1,28 +1,21 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/go
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
 {
 	"name": "Container Lab (with Go)",
-	"image": "mcr.microsoft.com/devcontainers/go:0-1-bullseye",
+	"image": "mcr.microsoft.com/devcontainers/base:jammy",
 	"features": {
 		"ghcr.io/devcontainers/features/docker-in-docker:2": {
-			"moby": true,
-			"azureDnsAutoDetection": true,
+			"moby": false,
+			"azureDnsAutoDetection": false,
 			"installDockerBuildx": true,
 			"version": "latest",
 			"dockerDashComposeVersion": "v2"
 		},
-		"ghcr.io/eitsupi/devcontainer-features/jq-likes:1": {
-			"jqVersion": "os-provided",
-			"yqVersion": "4",
-			"gojqVersion": "latest"
+		"ghcr.io/devcontainers/features/go:1": {
+			"version": "latest"
 		},
-		"ghcr.io/devcontainers/features/kubectl-helm-minikube:1": {
-			"version": "latest",
-			"helm": "latest",
-			"minikube": "none"
-		},
-		"ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
-			"packages": "podman,slirp4netns,uidmap" //podman dependencies not included in base image, nor in podman's install (?) 
+		"ghcr.io/devcontainers-contrib/features/bash-command:1": {
+			"command": "curl -ssL https://raw.githubusercontent.com/uivraeus/container-lab/main/extra-install.sh | bash" // podman, kubectl, helm etc.
 		},
 		"ghcr.io/rio/features/k3d:1": {}
 	},
