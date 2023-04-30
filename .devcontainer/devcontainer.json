@@ -23,7 +23,7 @@
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
-	"postCreateCommand": "k3d cluster create mycluster || echo 'Proceeding anyway'",
+	"postCreateCommand": "k3d cluster start mycluster 2>/dev/null || k3d cluster create mycluster || echo 'Proceeding anyway'",
 
 	// Podman requires the shared mount propagation:
 	// - https://github.com/containers/buildah/issues/3726#issuecomment-1018544246
@@ -36,7 +36,8 @@
 		"vscode": {
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
-				"golang.Go"
+				"golang.Go",
+				"ms-azuretools.vscode-docker"
 			]
 		}
 	}

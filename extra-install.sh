@@ -13,3 +13,6 @@ curl -sSL "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stab
 
 # yq
 curl -sSL https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -o /usr/local/bin/yq && chmod +x /usr/local/bin/yq
+
+# fix/adjustment of hardcoded value in the base image .bashrc
+sed -i 's/export PROMPT_DIRTRIM=4/export PROMPT_DIRTRIM=1/g' /home/vscode/.bashrc
